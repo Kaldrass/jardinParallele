@@ -11,3 +11,8 @@ Le jardin aura une taille dans l'espace définie au préalable.
 2) générer une scène topographie terrain et ajouter la flore.
 3) ajout des saisons (décroissance, fanage des plantes).
 4) OPTIONNEL ajout d'insectes sur les fleurs fanées et d'abeilles sur les fleurs qui poussent.
+
+
+
+# SOURCES
+site textures : https://ambientcg.com/list LICENSE CREATIVE COMMONS -> all good
