@@ -13,3 +13,7 @@ Le jardin aura une taille dans l'espace définie au préalable.
 4) OPTIONNEL ajout d'insectes sur les fleurs fanées et d'abeilles sur les fleurs qui poussent.
 # SOURCES
 site textures : https://ambientcg.com/list LICENSE CREATIVE COMMONS -> all good
+tree script reference : https://forum.unity.com/threads/updating-trees-via-editor-scripting.648679/
+guillaume cordonnier : https://www-sop.inria.fr/members/Guillaume.Cordonnier/#publi
+https://hal.science/hal-01518967
+https://inria.hal.science/hal-03245206
