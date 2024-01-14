@@ -59,7 +59,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\TreeGenerator.cs" />
     <Compile Include="Assets\Scripts\Croissance.cs" />
+    <Compile Include="Assets\Scripts\CameraFPS.cs" />
+    <Compile Include="Assets\IgniteCoders\Simple Water Shader\Info\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Feuille.cs" />
+    <Compile Include="Assets\IgniteCoders\Simple Water Shader\Resources\WaterReflection.cs" />
     <Compile Include="Assets\Scripts\Branche.cs" />
     <Compile Include="Assets\Scripts\Tronc.cs" />
   </ItemGroup>
