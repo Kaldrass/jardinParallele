@@ -57,14 +57,32 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2023.1.1f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MobileDepthWater\Scripts\CameraDepthSlider.cs" />
+    <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterPropertyBlockSetter.cs" />
+    <Compile Include="Assets\MobileDepthWater\Scripts\TouchRotator.cs" />
+    <Compile Include="Assets\MobileDepthWater\Scripts\FPSUI.cs" />
     <Compile Include="Assets\Scripts\TreeGenerator.cs" />
     <Compile Include="Assets\Scripts\Croissance.cs" />
+    <Compile Include="Assets\MobileDepthWater\Scripts\FPSCounter.cs" />
+    <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterMaterialSwitcher.cs" />
     <Compile Include="Assets\Scripts\CameraFPS.cs" />
-    <Compile Include="Assets\IgniteCoders\Simple Water Shader\Info\Scripts\Readme.cs" />
+    <Compile Include="Assets\MobileDepthWater\Scripts\AnimationStarter.cs" />
     <Compile Include="Assets\Scripts\Feuille.cs" />
-    <Compile Include="Assets\IgniteCoders\Simple Water Shader\Resources\WaterReflection.cs" />
     <Compile Include="Assets\Scripts\Branche.cs" />
+    <Compile Include="Assets\MobileDepthWater\Scripts\CameraRotator.cs" />
     <Compile Include="Assets\Scripts\Tronc.cs" />
+    <Compile Include="Assets\MobileDepthWater\Scripts\Water\WaterArea.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\MobileDepthWater\Shaders\WaterTwoSide\Height\DiffuseColorHeightWaterTwoSide.shader" />
+    <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\DiffuseWaterOpaque.shader" />
+    <None Include="Assets\MobileDepthWater\Shaders\WaterTwoSide\Depth\DiffuseColorDepthWaterTwoSide.shader" />
+    <None Include="Assets\MobileDepthWater\Shaders\WaterTwoSide\Depth\DiffuseDepthWaterTwoSide.shader" />
+    <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\Height\DiffuseHeightWater.shader" />
+    <None Include="Assets\MobileDepthWater\Shaders\WaterTwoSide\Height\DiffuseHeightWaterTwoSide.shader" />
+    <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\Depth\DiffuseDepthWater.shader" />
+    <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\Height\DiffuseColorHeightWater.shader" />
+    <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\Depth\DiffuseColorDepthWater.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
