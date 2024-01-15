@@ -45,7 +45,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _GlossMap:
         m_Texture: {fileID: 2800000, guid: 9022e6305fc000e4c865a64a127b7789, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0.5, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 13712ffa6140d304aacfd22d16969424, type: 3}
@@ -65,11 +65,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ShadowOffset:
         m_Texture: {fileID: 2800000, guid: e2fe0ae675718964cbf137c4ce35a30d, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0.5, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TranslucencyMap:
         m_Texture: {fileID: 2800000, guid: c67f8646247035146a9dcbf9738d4a8c, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0.5, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:

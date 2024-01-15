@@ -26,7 +26,13 @@ public class growthScript : MonoBehaviour
         // On va vouloir set la hauteur du tronc à vec2 (0,0) au début
         tronc.seed = Random.Range(0, 999999);
         tronc.radius = Random.Range(0.5f, 1.0f);
-        tronc.height = new Vector2(3.0f, 20.0f);
+        tronc.height = new Vector2(1.0f, 1.0f);
+        tData.branchGroups[1].seed = Random.Range(0, 999999);
+        tData.branchGroups[1].radius = Random.Range(0.5f, 1.0f);
+        tData.branchGroups[1].height = new Vector2(1.0f, 1.0f);
+
+        tData.leafGroups[0].seed = Random.Range(0, 999999);
+        tData.leafGroups[0].size = new Vector2(1.0f, 1.0f);
         tronc.distributionFrequency = Random.Range(1, 2);
         tronc.flareHeight = Random.Range(0.5f, 1.0f);
 
