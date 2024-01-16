@@ -21,6 +21,8 @@ public class TreeGeneration : MonoBehaviour
     
     [Range(0.01f, 1.0f)]
     public float acceptancePoint;
+
+    public LayerMask groundLayer;
     void Start()
     {
         for(int y = 0; y < height; y++) { 
