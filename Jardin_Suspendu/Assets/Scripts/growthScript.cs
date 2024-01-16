@@ -2,60 +2,127 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TreeEditor;
+using System.Data;
 
 // Script that describes the growth of a tree.
 public class growthScript : MonoBehaviour
 {
-    private Tree t;
-    public GameObject tree;
+    public Tree t;
     public TreeData tData;
-    public TreeGroupBranch tronc;
     public Material[] m;
+
+    [Range(0.01f,10f)]
+    public float growthDelay;
+    private float croissTime;
+    public float growthSpeed;
+
+    public float xTrunk;
+    public float yTrunk;
+
+    [Range(0.1f, 1.0f)]
+    public float radTrunk;
+
+    public float xBranch;
+    public float yBranch;
+    public float radBranch;
+
+    [Range(0.0f, 0.5f)]
+    public float xLeaf;
+    [Range(0.0f, 0.5f)]
+    public float yLeaf;
     // Start is called before the first frame update
     void Start()
     {
-        // Au début, il n'y a rien dans l'arbre
-        
-        t = tree.GetComponent<Tree>();
+        // On initialise les valeurs des variables
+        croissTime = Time.time + growthDelay;
+        //growthSpeed = 0.2f;
+
+        xTrunk = 1.0f;
+        yTrunk = 2.0f;
+        radTrunk = Random.Range(0.5f, 1.0f); ;
+
+        xBranch = 0.0f;
+        yBranch = 0.2f;
+        radBranch = Random.Range(0.0f, 0.2f);
+
+        xLeaf = 0.0f;
+        yLeaf = 0.1f;
+
         tData = t.data as TreeData;
-        // On ajoute une branche
-        //tData.branchGroups = new TreeGroupBranch[1];
-        tronc = tData.branchGroups[0];
-        tData.root.seed = Random.Range(0, 999999);
-        tData.root.rootSpread = Random.Range(1.0f, 5.0f);
+        var tronc = tData.branchGroups[0];
+
         // On va vouloir set la hauteur du tronc à vec2 (0,0) au début
-        tronc.seed = Random.Range(0, 999999);
-        tronc.radius = Random.Range(0.5f, 1.0f);
-        tronc.height = new Vector2(1.0f, 1.0f);
-        tData.branchGroups[1].seed = Random.Range(0, 999999);
-        tData.branchGroups[1].radius = Random.Range(0.5f, 1.0f);
-        tData.branchGroups[1].height = new Vector2(1.0f, 1.0f);
+        
+        tronc.height = new Vector2(xTrunk, yTrunk);
+        tronc.radius = radTrunk;
+        tData.branchGroups[1].height = new Vector2(xBranch, yBranch); // from 0 - 10
+        tData.branchGroups[1].radius = radBranch;
 
-        tData.leafGroups[0].seed = Random.Range(0, 999999);
-        tData.leafGroups[0].size = new Vector2(1.0f, 1.0f);
-        tronc.distributionFrequency = Random.Range(1, 2);
-        tronc.flareHeight = Random.Range(0.5f, 1.0f);
+        tData.leafGroups[0].size = new Vector2(xLeaf, yLeaf);
 
-        // On applique les mêmes transformations à toutes les branches
-        //for (int i = 1; i < tData.branchGroups.Length; i++)
-        //{
-        //    TreeGroupBranch branch = tData.branchGroups[i];
-        //    branch.seed = Random.Range(0, 999999);
-        //    branch.radius = Random.Range(0.5f, 1.0f);
-        //    branch.height = new Vector2(1.0f, 1.0f);
-        //    branch.distributionFrequency = Random.Range(1, 2);
-        //    branch.flareHeight = Random.Range(0.5f, 1.0f);
-        //    branch.visible = false;
-        //}
-        // On ne s'occupe pas des feuilles au début
-        tData.UpdateMesh(tree.transform.worldToLocalMatrix, out m);
-        Debug.Log("Current Seed: " + tData.root.seed);
+        tData.UpdateSeed(Random.Range(0, 999999));
+        tData.UpdateMesh(transform.worldToLocalMatrix, out m);
+
+        //Debug.Log("Current Seed: " + tData.root.seed);
+
     }
-
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Time.time >= croissTime) 
+        {
+            TrunkLength();
+            TrunkRadius();
+            if (Time.time >= 5.00f)
+            {
+                BranchLength();
+                BranchRadius();
+                if(Time.time >= 7.00f)
+                {
+                    LeafSize();
+                }
+            }
+            croissTime = Time.time + growthDelay;
+
+            tData.UpdateMesh(transform.worldToLocalMatrix, out m);
+        }
+    }
+    void TrunkLength()
+    {
+        xTrunk += growthSpeed;
+        yTrunk += growthSpeed;
+        tData.branchGroups[0].height = new Vector2(xTrunk, yTrunk);
+    }   
+    void TrunkRadius()
+    {
+        radTrunk += growthSpeed;
+        radTrunk = Mathf.Clamp(radTrunk, 0.0f, 1.0f);
+
+        tData.branchGroups[0].radius = radTrunk;
+    }
+    void BranchLength()
+    {
+        xBranch += growthSpeed;
+        yBranch += growthSpeed;
+        tData.branchGroups[1].height = new Vector2(xBranch, yBranch);
+    }
+    void BranchRadius()
+    {
+        radBranch += growthSpeed;
+        radBranch = Mathf.Clamp(radBranch, 0.0f, 1.0f);
+
+        tData.branchGroups[1].radius = radBranch;
+    }
+
+    void LeafSize()
+    {
+        xLeaf += growthSpeed;
+        yLeaf += growthSpeed;
+
+        xLeaf = Mathf.Clamp(xLeaf, 0.0f, 0.75f);
+        yLeaf = Mathf.Clamp(yLeaf, 0.0f, 1.0f);
+
+        tData.leafGroups[0].size = new Vector2(xLeaf, yLeaf);
     }
 }
