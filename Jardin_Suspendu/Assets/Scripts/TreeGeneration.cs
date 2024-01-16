@@ -14,6 +14,8 @@ public class TreeGeneration : MonoBehaviour
 
     [Range(0.01f, 10f)]
     public float acceptancePoint;
+
+    public LayerMask groundLayer;
     void Start()
     {
         for(int y = 0; y < height; y++) { 
@@ -25,9 +27,16 @@ public class TreeGeneration : MonoBehaviour
 
                 if (sample >= acceptancePoint)
                 {
-                    Debug.Log("Tree : " + x + " " + y);
-                    GameObject tree = Instantiate(treePrefab, new Vector3(x, 0, y), Quaternion.identity);
-                    tree.transform.SetParent(this.transform);
+                    if(Physics.Raycast(new Vector3(x,100 ,y), Vector3.down, out RaycastHit hit, 200f, groundLayer))
+                    {
+                        float yPoint;
+                        yPoint = hit.point.y;
+                        GameObject tree = Instantiate(treePrefab, new Vector3(x, yPoint, y), Quaternion.identity);
+                        tree.transform.SetParent(this.transform);
+                    }
+                    
+                    
+                    
 
                     //tree.GetComponent<growthScript>().seed = Random.Range(0, 999999);
                     //tree.GetComponent<growthScript>().width = Random.Range(1, 5);
