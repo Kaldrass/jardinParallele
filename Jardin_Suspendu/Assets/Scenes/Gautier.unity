@@ -648,17 +648,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406091498}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed3bc2ab96c3ddd4da15bf9f37a05359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 2
+  seed: 1234
   width: 100
   height: 100
-  scale: 5
+  scale: 1.66
   treePrefab: {fileID: 1406091498}
-  acceptancePoint: 5.03
+  acceptancePoint: 0.9
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1018,11 +1018,11 @@ MonoBehaviour:
   width: 100
   height: 100
   scale: 1.66
-  treePrefab: {fileID: 1823516004}
+  treePrefab: {fileID: 1406091498}
   acceptancePoint: 0.93
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!154 &2032576682
 TerrainCollider:
   m_ObjectHideFlags: 0
