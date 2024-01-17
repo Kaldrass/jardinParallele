@@ -89,11 +89,11 @@ public class CroissanceBoul : MonoBehaviour
         {
             TrunkLength();
             TrunkRadius();
-            if (Time.time >= 5.00f)
+            if (Time.time >= 2.00f)
             {
                 BranchLength();
                 BranchRadius();
-                if (Time.time >= 7.00f)
+                if (Time.time >= 6.00f)
                 {
                     LeafSize();
                 }

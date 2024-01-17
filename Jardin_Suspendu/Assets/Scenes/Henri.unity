@@ -151,9 +151,9 @@ MonoBehaviour:
   xTrunk: 0
   yTrunk: 0
   radTrunk: 0
-  xBranch: 0
-  yBranch: 0
-  radBranch: 0
+  xBranch: 2
+  yBranch: 4
+  radBranch: 0.5
   xLeaf: 0
   yLeaf: 0
 --- !u!1 &419016787
@@ -619,8 +619,8 @@ MonoBehaviour:
   tData: {fileID: -892713670133400063, guid: 2d333696d39a7d5419e7b1be24211274, type: 3}
   m:
   - {fileID: 2209576162898326065, guid: a1b952529017eee4ba40d309b471d9b5, type: 3}
-  growthDelay: 5
-  growthSpeed: 2.5
+  growthDelay: 2
+  growthSpeed: 0.5
   xTrunk: 0
   yTrunk: 0
   radTrunk: 0
@@ -702,8 +702,8 @@ MonoBehaviour:
   tData: {fileID: -892713670133400063, guid: 2d333696d39a7d5419e7b1be24211274, type: 3}
   m:
   - {fileID: -1533638932730312908, guid: 2d333696d39a7d5419e7b1be24211274, type: 3}
-  growthDelay: 5
-  growthSpeed: 2.5
+  growthDelay: 2
+  growthSpeed: 0.5
   xTrunk: 0
   yTrunk: 0
   radTrunk: 0
