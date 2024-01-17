@@ -1,30 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TreeEditor;
 
 public class TreeGenerator : MonoBehaviour
 {
-    public GameObject treeObject;
-    public GameObject treesInJardinObject;
+    public int seed;
+    public int width;
+    public int height;
 
-    public int treeNb;
+    [Range(0.01f, 10f)]
+    public float scale;
+    public GameObject treePrefab;
 
-    List<GameObject> treesList = new List<GameObject>();
-    GameObject[] treesArray;
-    // Start is called before the first frame update
+    [Range(0.01f, 10f)]
+    public float acceptancePoint;
+
+    public LayerMask groundLayer;
     void Start()
     {
-       for (int i = 0;i<=treeNb;i++)
+        for (int y = 0; y < height; y++)
         {
-            treesList.Add(Instantiate<GameObject>(treeObject));
-            treesArray = treesList.ToArray();
-            treesArray[i].transform.position = new Vector3(Random.Range(0,500), 0, Random.Range(0,500));
-            treesArray[i].transform.parent = treesInJardinObject.transform;
+            for (int x = 0; x < width; x++)
+            {
+                float xCoord = x / scale + seed;
+                float yCoord = y / scale + seed;
+                float sample = Mathf.PerlinNoise(xCoord, yCoord);
+
+                if (sample >= acceptancePoint)
+                {
+                    if (Physics.Raycast(new Vector3(x, 100, y), Vector3.down, out RaycastHit hit, 200f, groundLayer))
+                    {
+                        float yPoint;
+                        yPoint = hit.point.y;
+                        GameObject tree = Instantiate(treePrefab, new Vector3(x, yPoint, y), Quaternion.identity);
+                        tree.transform.SetParent(this.transform);
+                    }
+
+
+
+
+                    //tree.GetComponent<growthScript>().seed = Random.Range(0, 999999);
+                    //tree.GetComponent<growthScript>().width = Random.Range(1, 5);
+                    //tree.GetComponent<growthScript>().height = Random.Range(1, 5);
+                    //tree.GetComponent<growthScript>().scale = Random.Range(0.5f, 1.0f);
+                    //tree.GetComponent<growthScript>().acceptancePoint = Random.Range(0.5f, 1.0f);
+                }
+            }
         }
     }
 
-
-    // Update is called once per frame
-    
 }
