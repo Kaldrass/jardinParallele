@@ -84,7 +84,6 @@ public class growthScript : MonoBehaviour
                 }
             }
             croissTime = Time.time + growthDelay;
-
             tData.UpdateMesh(transform.worldToLocalMatrix, out m);
         }
     }
