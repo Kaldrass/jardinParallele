@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TreeEditor;
+using System.Data;
 
 public class TreeGenerator : MonoBehaviour
 {
@@ -11,8 +13,11 @@ public class TreeGenerator : MonoBehaviour
     [Range(0.01f, 10f)]
     public float scale;
     public GameObject treePrefab;
+    //public Tree arbre1;
+    //public Tree arbre2;
+    //public Tree arbre3;
 
-    [Range(0.01f, 10f)]
+    [Range(0.01f, 1f)]
     public float acceptancePoint;
 
     public LayerMask groundLayer;
