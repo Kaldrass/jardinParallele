@@ -20,7 +20,7 @@ public class TreeGenerator : MonoBehaviour
     {
         for (int y = 0; y < height; y++)
         {
-            for (int x = 0; x < width; x++)
+            for (int x = 60; x < width; x++)
             {
                 float xCoord = x / scale + seed;
                 float yCoord = y / scale + seed;
