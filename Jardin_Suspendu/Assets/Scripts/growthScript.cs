@@ -18,6 +18,7 @@ public class growthScript : MonoBehaviour
 
     public float xTrunk;
     public float yTrunk;
+    private float height; // min of the height, =xTrunk but not updated in TrunkLength()
 
     [Range(0.1f, 1.0f)]
     public float radTrunk;
@@ -30,6 +31,7 @@ public class growthScript : MonoBehaviour
     public float xLeaf;
     [Range(0.0f, 0.5f)]
     public float yLeaf;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,7 @@ public class growthScript : MonoBehaviour
         xTrunk = 1.0f;
         yTrunk = 2.0f;
         radTrunk = Random.Range(0.5f, 1.0f); ;
+        height = xTrunk;
 
         xBranch = 0.0f;
         yBranch = 0.2f;
@@ -57,9 +60,10 @@ public class growthScript : MonoBehaviour
         tronc.radius = radTrunk;
         tData.branchGroups[1].height = new Vector2(xBranch, yBranch); // from 0 - 10
         tData.branchGroups[1].radius = radBranch;
-
+        tData.branchGroups[1].distributionFrequency = 1;
         tData.leafGroups[0].size = new Vector2(xLeaf, yLeaf);
-
+        
+        tData.UpdateFrequency(1);
         tData.UpdateSeed(Random.Range(0, 999999));
         tData.UpdateMesh(transform.worldToLocalMatrix, out m);
 
@@ -72,18 +76,17 @@ public class growthScript : MonoBehaviour
     {
         if(Time.time >= croissTime) 
         {
-            TrunkLength();
-            TrunkRadius();
+            UpdateTrunk();
             if (Time.time >= 5.00f)
             {
-                BranchLength();
-                BranchRadius();
+                UpdateBranch();
                 if(Time.time >= 7.00f)
                 {
-                    LeafSize();
+                    UpdateLeaf();
                 }
             }
             croissTime = Time.time + growthDelay;
+            tData.UpdateFrequency(1);
             tData.UpdateMesh(transform.worldToLocalMatrix, out m);
         }
     }
@@ -104,6 +107,8 @@ public class growthScript : MonoBehaviour
     {
         xBranch += growthSpeed;
         yBranch += growthSpeed;
+        xBranch = Mathf.Clamp(xBranch, 0.0f, 10.0f);
+        yBranch = Mathf.Clamp(yBranch, 0.0f, 10.0f);
         tData.branchGroups[1].height = new Vector2(xBranch, yBranch);
     }
     void BranchRadius()
@@ -124,4 +129,24 @@ public class growthScript : MonoBehaviour
 
         tData.leafGroups[0].size = new Vector2(xLeaf, yLeaf);
     }
+    void UpdateTrunk()
+    {
+        TrunkLength();
+        TrunkRadius();
+        if (xTrunk - height > 0.5f)
+        {
+            height = xTrunk;
+            tData.branchGroups[1].distributionFrequency++;
+        }
+
+    }
+    void UpdateBranch()
+    {
+        BranchLength();
+        BranchRadius();
+    }
+    void UpdateLeaf()
+    {
+        LeafSize();
+    }   
 }
