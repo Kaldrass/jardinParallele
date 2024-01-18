@@ -79,30 +79,33 @@ public class CroissanceBoul : MonoBehaviour
         tData.UpdateMesh(transform.worldToLocalMatrix, out m);
 
         //Debug.Log("Current Seed: " + tData.root.seed);
+        InvokeRepeating("MyUpdate", 1, 0.1f);
 
     }
-
-    // Update is called once per frame
-    void Update()
+    public void MyUpdate()
     {
-        if (Time.time >= croissTime)
+        if (yBranch <= 19.0f)
         {
-            TrunkLength();
-            TrunkRadius();
-            if (Time.time >= 2.00f)
+            if (Time.time >= croissTime)
             {
-                BranchLength();
-                BranchRadius();
-                if (Time.time >= 6.00f)
+                TrunkLength();
+                TrunkRadius();
+                if (Time.time >= 2.00f)
                 {
-                    LeafSize();
+                    BranchLength();
+                    BranchRadius();
+                    if (Time.time >= 6.00f)
+                    {
+                        LeafSize();
+                    }
                 }
-            }
-            croissTime = Time.time + growthDelay;
+                croissTime = Time.time + growthDelay;
 
-            tData.UpdateMesh(transform.worldToLocalMatrix, out m);
+                tData.UpdateMesh(transform.worldToLocalMatrix, out m);
+            }
         }
     }
+    
     void TrunkLength()
     {
         xTrunk += growthSpeed;

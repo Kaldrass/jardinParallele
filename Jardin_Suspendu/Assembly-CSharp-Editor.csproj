@@ -84,8 +84,8 @@
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Editor\Utils\EditorResources.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Editor\Monitors\WaveformMonitor.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Editor\Models\DefaultPostFxModelEditor.cs" />
-    <Compile Include="Assets\Water\Example Scenes\PostProcessing\Editor\PostProcessingMonitor.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Editor\Models\FogModelEditor.cs" />
+    <Compile Include="Assets\Water\Example Scenes\PostProcessing\Editor\PostProcessingMonitor.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Editor\Attributes\PostProcessingModelEditorAttribute.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Editor\Models\UserLutModelEditor.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Editor\Models\AntialiasingModelEditor.cs" />
