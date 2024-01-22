@@ -4,6 +4,7 @@ using UnityEngine;
 using TreeEditor;
 using System.Data;
 using Unity.VisualScripting;
+using UnityEngine.Assertions.Must;
 
 // Script that describes the growth of a tree.
 public class growthScript : MonoBehaviour
@@ -15,36 +16,40 @@ public class growthScript : MonoBehaviour
 
     [Range(0.01f,10f)]
     public float growthDelay;
-    private float croissTime;
     public float growthSpeed;
-
-    public float xTrunk;
-    public float yTrunk;
 
     [Range(0.1f, 1.0f)]
     public float radTrunk;
-
-    public float xBranch;
-    public float yBranch;
-    public float radBranch;
 
     [Range(0.0f, 0.5f)]
     public float xLeaf;
     [Range(0.0f, 0.5f)]
     public float yLeaf;
+    public int maxNbFeuilles = 40;
+    [Range(1.0f, 2.0f)]
+    public float windMainForce;
 
+    private float croissTime;
 
     private float height; // min of the height, = xTrunk but not updated in TrunkLength()
     private float maxHeight; // Max of the height 
     private float maxRadius;
     private float maxLeafSize;
+    private int maxNbBranches = 30;
+    private int nbFeuilles = 2;
 
     private TreeGroupBranch branches;
     private TreeGroupBranch tronc;
     private TreeGroupLeaf feuilles;
-
     private bool growing = false;
     private bool tGrown, bGrown, lGrown = false;
+
+    float xTrunk;
+    float yTrunk;
+
+    float xBranch;
+    float yBranch;
+    float radBranch;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,7 +103,9 @@ public class growthScript : MonoBehaviour
     {
         if(Time.time >= croissTime && growing == false) 
         {
-            float gs = PetitSoufflet() ? 0.5f * growthSpeed : growthSpeed; // Si le vent souffle, on la croissance est moitié plus lente
+            windZone.windMain = windMainForce; // windMainForce entre 1.0f et 2.0f
+            float gs = PetitSoufflet() ? (0.5f * 1.0f / windZone.windMain) * growthSpeed : growthSpeed; 
+            // Si le vent souffle, on la croissance est moitié plus lente
             // c'est la thigmomorphogenèse pour faire plus savant
             reduceMax(gs);
             growing = true;
@@ -112,7 +119,7 @@ public class growthScript : MonoBehaviour
                 }
             }
             croissTime = Time.time + growthDelay;
-            tData.UpdateFrequency(1);
+            tData.UpdateFrequency(1); // UpdateFrequency(id) mais id = 1 fonctionne tout le temps
             tData.UpdateMesh(transform.worldToLocalMatrix, out m);
             growing = (tGrown && bGrown && lGrown); // Fonctionne car Update est en séquentiel. True quand tout est grown
         }
@@ -177,7 +184,7 @@ public class growthScript : MonoBehaviour
         {
             height = xTrunk;
             branches.distributionFrequency++; // On ajoute une branche
-            branches.distributionFrequency = (int)(Mathf.Clamp(branches.distributionFrequency, 1.0f, 30.0f)); // 30 branches maximum, question de ressources
+            branches.distributionFrequency = (int)(Mathf.Clamp(branches.distributionFrequency, 1.0f, (float)maxNbBranches)); // 30 branches maximum, question de ressources
         }
         BranchLength(growthSpeed);
         BranchRadius(growthSpeed);
@@ -187,20 +194,20 @@ public class growthScript : MonoBehaviour
     {
         var sizeValue = xLeaf;
         var numberValue = feuilles.distributionFrequency;
-        feuilles.distributionFrequency+=2; // On ajoute 2 feuilles          
-        feuilles.distributionFrequency = ((int)Mathf.Clamp(feuilles.distributionFrequency, 1.0f, 40.0f)); // MAXIMUM 100 FEUILLES PAR BRANCHE
+        feuilles.distributionFrequency += nbFeuilles; // On ajoute 2 feuilles          
+        feuilles.distributionFrequency = ((int)Mathf.Clamp(feuilles.distributionFrequency, 1.0f, (float)maxNbFeuilles)); // GRAND MAXIMUM 100 FEUILLES PAR BRANCHE
         LeafSize(growthSpeed);
         return (sizeValue == xLeaf && numberValue == feuilles.distributionFrequency);
     }   
     bool PetitSoufflet()
     {
-        // Fonction qui retourne si l'arbre se prend une petite brise d'été
+        // Fonction qui retourne si l'arbre se prend une petite brise
         Mesh mesh = tData.mesh;
         // check for all points of the mesh if it's inside the spherical windzone
         foreach (Vector3 point in mesh.vertices)
         {
-            // Pas opti, on check tous les points en non juste ceux en périphérie
-            // Mais le café de cette machine est plutôt bon
+            // Pas opti, on check tous les points en non juste ceux en périphérie mais fait le café
+            // Cependant, le café de cette machine est plutôt bon
             if (windZone.transform.InverseTransformPoint(transform.TransformPoint(point)).magnitude < windZone.radius)
             {
                 Debug.Log("Petit Soufflet");
@@ -213,15 +220,24 @@ public class growthScript : MonoBehaviour
     void reduceMax(float gs)
     {
         // Fonction qui va réduire les max de l'arbre en fonction du vent (pour l'instant)
+        nbFeuilles = gs != growthSpeed ? 1 : 2; // Si le vent souffle, on réduit le nombre de feuilles
         if(gs != growthSpeed)
         {
+            // windZone.windMain est un float donnant la force globale du vent. A utiliser pour faire varier les valeurs.
+            // Max 2 pour le réalisme, 1 est la valeur par défaut -> valeur minimale
+
+            // HAUTEUR DU TRONC
             maxHeight -= (growthSpeed - gs);
             maxHeight = Mathf.Clamp(maxHeight, xTrunk, maxHeight); // min(max) = xTrunk
+            // LARGEUR DU TRONC
             maxRadius += (growthSpeed - gs) / 20.0f; // Le tronc grossit quand il y a du vent pour mieux résister
             maxRadius = Mathf.Clamp(maxRadius, 0.0f, 2.0f);
-            //maxRadius = Mathf.Clamp(maxRadius, 0.0f, maxRadius);
-            //maxLeafSize -= (growthSpeed - gs) * 0.1f;
-            //maxLeafSize = Mathf.Clamp(maxLeafSize, xLeaf, maxLeafSize); // min(max) = xLeaf
+            // NB DE BRANCHES
+            maxNbBranches -= 1;
+            maxNbBranches = Mathf.Clamp(maxNbBranches, branches.distributionFrequency, maxNbBranches); // min(max) = branches.distributionFrequency
+            // NB DE FEUILLES
+            maxNbFeuilles -= 1;
+            maxNbFeuilles = Mathf.Clamp(maxNbFeuilles, feuilles.distributionFrequency, maxNbFeuilles); // min(max) = feuilles.distributionFrequency
         }
     }
 }
