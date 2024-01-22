@@ -62,6 +62,7 @@
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Models\GrainModel.cs" />
     <Compile Include="Assets\Scripts\growthScript.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
+    <Compile Include="Assets\Scripts\TreeGeneratorProx.cs" />
     <Compile Include="Assets\Scripts\TreeGenerator.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Models\VignetteModel.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Components\BloomComponent.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Models\DepthOfFieldModel.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Components\BuiltinDebugViewsComponent.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Components\EyeAdaptationComponent.cs" />
+    <Compile Include="Assets\Scripts\CroissanceBoulProx.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\PostProcessingProfile.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Components\TaaComponent.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\PostProcessingBehaviour.cs" />
@@ -93,14 +95,11 @@
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Components\FxaaComponent.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Components\DepthOfFieldComponent.cs" />
-    <Compile Include="Assets\Scripts\Feuille.cs" />
-    <Compile Include="Assets\Scripts\Branche.cs" />
     <Compile Include="Assets\Water\#NVJOB Water Shaders V2\NVWaterShaders.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Components\MotionBlurComponent.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Utils\GraphicsUtils.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\PostProcessingModel.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Models\FogModel.cs" />
-    <Compile Include="Assets\Scripts\Tronc.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Models\ColorGradingModel.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Models\EyeAdaptationModel.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\PostProcessingContext.cs" />
@@ -117,6 +116,7 @@
     <Compile Include="Assets\Water\Example Scenes\Environment\Scripts\Lighthouse.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Components\DitheringComponent.cs" />
     <Compile Include="Assets\Water\Example Scenes\PostProcessing\Runtime\Attributes\TrackballGroupAttribute.cs" />
+    <Compile Include="Assets\Scripts\CroissanceBuissonProx.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Water\Example Scenes\PostProcessing\Editor Resources\Monitors\WaveformRender.shader" />
