@@ -54,8 +54,8 @@ public class TreeGeneration : MonoBehaviour
 
                     //Debug.Log("Current Seed: " + seed);
 
-                    //////////////GameObject tree = Instantiate(treePrefab, new Vector3(x, 0, y), Quaternion.identity);
-                    //t.transform.SetParent(this.transform);
+                    ////////GameObject tree = Instantiate(treePrefab, new Vector3(x, 0, y), Quaternion.identity);
+                    ////////t.transform.SetParent(this.transform);
                     //Random.InitState(System.Environment.TickCount);
 
                     //GameObject tree = new GameObject();

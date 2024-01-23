@@ -148,14 +148,11 @@ MonoBehaviour:
   windZone: {fileID: 1726135707}
   growthDelay: 1
   growthSpeed: 1
-  xTrunk: 0
-  yTrunk: 0
   radTrunk: 0
-  xBranch: 0
-  yBranch: 0
-  radBranch: 0
   xLeaf: 0
   yLeaf: 0
+  maxNbFeuilles: 40
+  windMainForce: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,14 +430,11 @@ MonoBehaviour:
   windZone: {fileID: 1726135707}
   growthDelay: 1
   growthSpeed: 1
-  xTrunk: 0
-  yTrunk: 0
   radTrunk: 0
-  xBranch: 0
-  yBranch: 0
-  radBranch: 0
   xLeaf: 0
   yLeaf: 0
+  maxNbFeuilles: 40
+  windMainForce: 0
 --- !u!193 &1070291502 stripped
 Tree:
   m_CorrespondingSourceObject: {fileID: 3565835339074369795, guid: a1b952529017eee4ba40d309b471d9b5, type: 3}
@@ -552,7 +546,7 @@ WindZone:
   m_WindMain: 1
   m_WindTurbulence: 1
   m_WindPulseMagnitude: 0.5
-  m_WindPulseFrequency: 0.01
+  m_WindPulseFrequency: 0.1
 --- !u!4 &1726135708
 Transform:
   m_ObjectHideFlags: 0
@@ -561,7 +555,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726135706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.8, y: 0, z: 89.4}
+  m_LocalPosition: {x: 45.8, y: 0, z: 87.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -594,7 +588,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032576680}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed3bc2ab96c3ddd4da15bf9f37a05359, type: 3}
   m_Name: 
