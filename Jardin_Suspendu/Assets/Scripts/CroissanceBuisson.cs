@@ -127,6 +127,7 @@ public class CroissanceBuisson : MonoBehaviour
             windZone.windMain = windMainForce;
             reduceProxi(proxi);
             reduceAlti(alti);
+            reduceMax(gs);
             growing = true;
             tGrown = UpdateTrunk(gs);
             if (Time.time >= 3.00f)
