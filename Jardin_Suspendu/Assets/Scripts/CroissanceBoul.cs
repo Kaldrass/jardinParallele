@@ -11,7 +11,11 @@ public class CroissanceBoul : MonoBehaviour
     public TreeData tData;
     public Material[] m;
     public WindZone windZone;
+    public GameObject water;
+    public GameObject Colline;
 
+    public float distWater = 15.0f;
+    public float distAltitude = 5.0f;
 
     [Range(0.01f, 10f)]
     public float growthDelay;
@@ -107,7 +111,7 @@ public class CroissanceBoul : MonoBehaviour
         
         if (Time.time >= croissTime && growing == false)
         {
-            float gs = growthSpeed;
+            float gs = ProxiWater() ? 2f * growthSpeed : growthSpeed;
             growing = true;
             tGrown = UpdateTrunk(gs);
             if (Time.time >= 3.00f)
@@ -205,5 +209,38 @@ public class CroissanceBoul : MonoBehaviour
         feuilles.distributionFrequency = ((int)Mathf.Clamp(feuilles.distributionFrequency, 1.0f, 40.0f)); // MAXIMUM 100 FEUILLES PAR BRANCHE
         LeafSize(growthSpeed);
         return (sizeValue == xLeaf && numberValue == feuilles.distributionFrequency);
+    }
+    bool ProxiWater()
+    {
+
+        Mesh mesh = tData.mesh;
+        // meshw = GameObject.Mesh(water).GetComponent<Mesh>();
+
+        foreach (Vector3 point in mesh.vertices)
+        {
+
+            if (water.transform.InverseTransformPoint(transform.TransformPoint(point)).magnitude < distWater)
+            {
+                Debug.Log("Proxi");
+                return true;
+            }
+        }
+        Debug.Log("Pas proxi");
+        return false;
+    }
+    bool Altitude()
+    {
+        Mesh mesh = tData.mesh;
+
+        foreach (var point in mesh.vertices)
+        {
+            if (Colline.transform.InverseTransformPoint(transform.TransformPoint(point)).magnitude < distAltitude)
+            {
+                Debug.Log("Altitude");
+                return true;
+            }
+        }
+        Debug.Log("Pas Altitude");
+        return false;
     }
 }
