@@ -80,6 +80,8 @@ public class growthScript : MonoBehaviour
         branches.distributionFrequency = 1; // Nbr de branches
         branches.distributionPitch = 0.3f; // Inclinaison des branches
         branches.seekBlend = 0.1f; // cherche le soleil à 10%
+        branches.breakingChance = 0.0f; // Aucune chance de casser au début
+        branches.breakingSpot = new Vector2(0.8f,1.0f);
 
         // PARTIE FEUILLES
         maxLeafSize = 1.0f;
@@ -101,9 +103,9 @@ public class growthScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        windZone.windMain = Mathf.Clamp(windMainForce, 1.0f, 2.0f); // windMainForce entre 1.0f et 2.0f
         if(Time.time >= croissTime && growing == false) 
         {
-            windZone.windMain = windMainForce; // windMainForce entre 1.0f et 2.0f
             float gs = PetitSoufflet() ? (0.5f * 1.0f / windZone.windMain) * growthSpeed : growthSpeed; 
             // Si le vent souffle, on la croissance est moitié plus lente
             // c'est la thigmomorphogenèse pour faire plus savant
@@ -221,7 +223,7 @@ public class growthScript : MonoBehaviour
     {
         // Fonction qui va réduire les max de l'arbre en fonction du vent (pour l'instant)
         nbFeuilles = gs != growthSpeed ? 1 : 2; // Si le vent souffle, on réduit le nombre de feuilles
-        if(gs != growthSpeed)
+        if(gs != growthSpeed) // Si le vent souffle
         {
             // windZone.windMain est un float donnant la force globale du vent. A utiliser pour faire varier les valeurs.
             // Max 2 pour le réalisme, 1 est la valeur par défaut -> valeur minimale
@@ -238,6 +240,10 @@ public class growthScript : MonoBehaviour
             // NB DE FEUILLES
             maxNbFeuilles -= 1;
             maxNbFeuilles = Mathf.Clamp(maxNbFeuilles, feuilles.distributionFrequency, maxNbFeuilles); // min(max) = feuilles.distributionFrequency
+        
+            branches.breakingChance += windZone.windMain * 0.01f; // Plus le vent souffle, plus les branches sont susceptibles de casser
+            branches.breakingSpot *= 0.99f;
+            // On augmente les chances de cassez les branches de 1% à chaque frame, scale en fonction de la force du vent
         }
     }
 }
